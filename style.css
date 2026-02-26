@@ -1255,40 +1255,163 @@ body:not(:hover) .cursor, body:not(:hover) .cursor-trail { opacity: 0; }
 /* ══════════════════════════════════════════
    RESPONSIVE
 ══════════════════════════════════════════ */
+
+/* ─── Tablet (max 1024px) ─── */
 @media (max-width: 1024px) {
   .projects-grid { grid-template-columns: repeat(2, 1fr); }
   .testimonials-track { grid-template-columns: 1fr; }
   .hero-3d-object { width: 320px; height: 320px; }
-}
-
-@media (max-width: 768px) {
-  .nav-links, .btn-glass.nav-cta { display: none; }
-  .hamburger { display: flex; cursor: none; }
-  
-  .hero-title { font-size: clamp(2.2rem, 8vw, 3.5rem); }
-  .layer-3 { display: none; }
-  
-  .about-grid { grid-template-columns: 1fr; gap: 3rem; }
-  .about-features { grid-template-columns: 1fr; }
-  
-  .projects-grid { grid-template-columns: 1fr; }
-  .skills-grid { grid-template-columns: 1fr; }
-  
+  .navbar { width: min(1100px, 98vw); padding: 0.65rem 1.5rem; }
   .contact-grid { grid-template-columns: 1fr; }
-  .form-row { grid-template-columns: 1fr; }
-  
-  .footer-inner { flex-direction: column; text-align: center; gap: 0.75rem; }
-  .footer-links { justify-content: center; }
-  
-  .hero-stats { gap: 1.25rem; }
-  .stat-number { font-size: 1.5rem; }
+  .about-grid { gap: 3rem; }
 }
 
-@media (max-width: 480px) {
-  .hero-actions { flex-direction: column; align-items: flex-start; }
-  .hero-badge { font-size: 0.8rem; }
-  .section { padding: 5rem 0; }
+/* ─── Mobile (max 768px) ─── */
+@media (max-width: 768px) {
+  /* Hide desktop cursor on touch devices */
+  .cursor, .cursor-trail { display: none !important; }
+  body { cursor: auto; }
+
+  /* Navbar */
+  .nav-links, .btn-glass.nav-cta { display: none; }
+  .hamburger { display: flex; cursor: pointer; }
+  .navbar { 
+    padding: 0.6rem 1.25rem; 
+    width: min(1100px, 96vw);
+    top: 10px;
+  }
+  .nav-brand { font-size: 1.05rem; }
+
+  /* Mobile menu */
+  .mobile-menu {
+    top: 70px;
+    width: min(400px, 92vw);
+  }
+  .mobile-link {
+    padding: 1rem 1.25rem;
+    font-size: 1rem;
+  }
+
+  /* Hero */
+  .hero-title { font-size: clamp(2rem, 8vw, 3.5rem); letter-spacing: -1px; }
+  .hero-subtitle { font-size: 1rem; }
+  .layer-3 { display: none; }
+  .layer-2 { padding: 0 1.25rem; }
+  .hero-content { padding-top: 8rem; }
+  .hero-stats { gap: 1.25rem; justify-content: center; }
+  .stat-number { font-size: 1.5rem; }
+  .stat-divider { height: 30px; }
+  .scroll-indicator { bottom: 1.5rem; }
+
+  /* Page Hero (sub-pages) */
+  .page-hero { padding: 8rem 1rem 2.5rem; }
+  .page-title { font-size: clamp(2rem, 6vw, 3rem) !important; letter-spacing: -1px !important; }
+
+  /* Sections */
+  .section { padding: 4rem 0; }
+  .container { padding: 0 1.25rem; }
+  .section-header { margin-bottom: 2.5rem; }
+  .section-title { font-size: clamp(1.6rem, 5vw, 2.5rem); }
+  .section-subtitle { font-size: 0.95rem; }
+
+  /* About */
+  .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .about-features { grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+  .about-heading { font-size: 1.5rem; }
+  .about-image-placeholder { min-height: 280px; }
+
+  /* Projects */
+  .projects-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+  .project-info { padding: 1.25rem; }
+  .project-title { font-size: 1.1rem; }
+  .project-desc { font-size: 0.82rem; }
+  .projects-filter { gap: 0.4rem; margin-bottom: 2rem; }
+  .filter-btn { padding: 0.45rem 1rem; font-size: 0.8rem; }
+
+  /* Skills */
+  .skills-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+  .skill-category { padding: 1.5rem; }
+  .skill-category h3 { font-size: 1.1rem; margin-bottom: 1rem; }
+
+  /* Testimonials */
+  .testimonials-track { grid-template-columns: 1fr; gap: 1rem; }
+  .testimonial-card { padding: 1.5rem; }
+  .testimonial-text { font-size: 0.85rem; }
+
+  /* Contact */
+  .contact-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+  .form-row { grid-template-columns: 1fr; }
   .contact-form { padding: 1.5rem; }
+  .contact-info { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr 1fr; 
+    gap: 0.75rem; 
+  }
+  .contact-card { 
+    padding: 1rem; 
+    text-align: center; 
+    align-items: center; 
+  }
+  .social-links { justify-content: center; grid-column: 1 / -1; }
+  .form-group input, .form-group textarea {
+    padding: 0.9rem 1rem;
+    font-size: 1rem; /* prevent iOS zoom */
+  }
+
+  /* Footer */
+  .footer-inner { 
+    flex-direction: column; 
+    text-align: center; 
+    gap: 0.75rem;
+    padding: 1.25rem 1rem;
+  }
+  .footer-copy { font-size: 0.8rem; }
+  .footer-links { justify-content: center; gap: 1rem; }
+
+  /* Buttons */
+  .btn { padding: 0.8rem 1.75rem; font-size: 0.85rem; }
+  .btn-full { padding: 0.9rem 1.5rem; }
+}
+
+/* ─── Small Mobile (max 480px) ─── */
+@media (max-width: 480px) {
+  .hero-title { font-size: clamp(1.8rem, 9vw, 2.5rem); }
+  .hero-subtitle { font-size: 0.9rem; line-height: 1.7; }
+  .hero-actions { flex-direction: column; align-items: stretch; }
+  .hero-actions .btn { text-align: center; justify-content: center; }
+  .hero-badge { font-size: 0.75rem; padding: 0.4rem 1rem; }
+  .hero-content { padding-top: 7rem; }
+  
+  .section { padding: 3.5rem 0; }
+  .container { padding: 0 1rem; }
+  
+  .page-hero { padding: 7rem 1rem 2rem; }
+  .page-title { font-size: clamp(1.7rem, 7vw, 2.2rem) !important; }
+
+  /* About features - single column on small screens */
+  .about-features { grid-template-columns: 1fr; }
+  .feature-item { padding: 0.75rem; }
+  .about-heading { font-size: 1.3rem; }
+
+  /* Contact cards - stack on small screens */
+  .contact-info { grid-template-columns: 1fr; }
+  .social-links { grid-column: auto; }
+  .contact-form { padding: 1.25rem; }
+
+  /* Stats */
+  .hero-stats { gap: 1rem; }
+  .stat-number { font-size: 1.3rem; }
+  .stat-item p { font-size: 0.7rem; }
+  .stat-divider { height: 25px; }
+
+  /* Footer */
+  .footer-brand { font-size: 0.95rem; }
+  .footer-links { flex-wrap: wrap; justify-content: center; }
+
+  /* Navbar */
+  .navbar { top: 8px; padding: 0.5rem 1rem; }
+  .nav-brand { font-size: 0.95rem; }
+  .mobile-menu { top: 60px; }
 }
 
 /* ══════════════════════════════════════════
