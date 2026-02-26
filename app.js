@@ -497,29 +497,57 @@ const $$ = (selector) => document.querySelectorAll(selector);
 })();
 
 // ═══════════════════════════════════════════
-// 11. CONTACT FORM
+// 11. CONTACT FORM (Web3Forms)
 // ═══════════════════════════════════════════
 (function initContactForm() {
   const form = $('#contact-form');
   const btn = $('#submit-btn');
   if (!form || !btn) return;
 
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
     btn.classList.add('sending');
     btn.querySelector('span').textContent = 'Sending...';
+    btn.disabled = true;
 
-    setTimeout(() => {
+    try {
+      const formData = new FormData(form);
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify(Object.fromEntries(formData)),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        btn.classList.remove('sending');
+        btn.classList.add('success');
+        btn.querySelector('span').textContent = '✓ Message Sent!';
+        form.reset();
+
+        setTimeout(() => {
+          btn.classList.remove('success');
+          btn.querySelector('span').textContent = 'Send Message';
+        }, 4000);
+      } else {
+        throw new Error(result.message || 'Something went wrong');
+      }
+    } catch (error) {
       btn.classList.remove('sending');
-      btn.classList.add('success');
-      btn.querySelector('span').textContent = '✓ Message Sent!';
-      form.reset();
+      btn.querySelector('span').textContent = '✕ Failed to send';
 
       setTimeout(() => {
-        btn.classList.remove('success');
         btn.querySelector('span').textContent = 'Send Message';
-      }, 4000);
-    }, 2000);
+      }, 3000);
+
+      console.error('Form submission error:', error);
+    } finally {
+      btn.disabled = false;
+    }
   });
 })();
 
